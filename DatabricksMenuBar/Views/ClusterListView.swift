@@ -26,6 +26,44 @@ struct ClusterListView: View {
                         }
                     }
                 }
+
+                Menu {
+                    Button {
+                        viewModel.manualRefresh()
+                    } label: {
+                        Label("Refresh", systemImage: "arrow.clockwise")
+                    }
+                    .keyboardShortcut("r")
+
+                    Divider()
+
+                    Button {
+                        viewModel.openConfig()
+                    } label: {
+                        Label("Edit Config", systemImage: "gearshape")
+                    }
+
+                    Button {
+                        viewModel.reloadConfig()
+                    } label: {
+                        Label("Reload Config", systemImage: "arrow.triangle.2.circlepath")
+                    }
+
+                    Divider()
+
+                    Button {
+                        NSApplication.shared.terminate(nil)
+                    } label: {
+                        Label("Quit", systemImage: "power")
+                    }
+                    .keyboardShortcut("q")
+                } label: {
+                    Image(systemName: "ellipsis.circle")
+                        .font(.system(size: 13))
+                        .foregroundStyle(.secondary)
+                }
+                .menuStyle(.borderlessButton)
+                .frame(width: 20)
             }
             .padding(.horizontal, 12)
             .padding(.top, 12)
@@ -76,10 +114,14 @@ struct ClusterListView: View {
                 }
             }
 
-            Divider()
-
-            // Footer
-            FooterView(viewModel: viewModel)
+            // Footer — last updated
+            if let lastRefreshed = viewModel.lastRefreshed {
+                Divider()
+                Text("Updated \(lastRefreshed, style: .relative) ago")
+                    .font(.caption2)
+                    .foregroundStyle(.tertiary)
+                    .padding(.vertical, 6)
+            }
         }
         .frame(width: 320, height: 400)
     }
