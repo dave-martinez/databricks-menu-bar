@@ -234,7 +234,6 @@ struct ClusterRowView: View {
             Text(value)
                 .font(.system(size: 11, design: .monospaced))
                 .foregroundStyle(.secondary)
-                .lineLimit(1)
         }
     }
 }
