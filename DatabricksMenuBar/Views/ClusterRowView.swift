@@ -59,19 +59,6 @@ struct ClusterRowView: View {
                         .foregroundStyle(.tertiary)
                 }
 
-                if clusterState == .terminated, let hours = cluster.terminatedAgoHours {
-                    Text("\(hours)h ago")
-                        .font(.caption)
-                        .foregroundStyle(.tertiary)
-                }
-
-                if clusterState == .terminated, let by = cluster.terminatedBy {
-                    Text(by)
-                        .font(.caption)
-                        .foregroundStyle(.tertiary)
-                        .lineLimit(1)
-                }
-
                 Text(clusterState.displayName)
                     .font(.caption)
                     .foregroundStyle(.secondary)
@@ -123,6 +110,11 @@ struct ClusterRowView: View {
                        let uptime = cluster.uptimeString {
                         let startedBy = cluster.lastStartedBy.map { " by \($0)" } ?? ""
                         detailRow(label: "Uptime", value: "\(uptime)\(startedBy)")
+                    }
+                    if (clusterState == .terminated || clusterState == .terminating),
+                       let hours = cluster.terminatedAgoHours {
+                        let by = cluster.terminatedBy.map { " by \($0)" } ?? ""
+                        detailRow(label: "Terminated", value: "\(hours)h ago\(by)")
                     }
 
                     // Action buttons
