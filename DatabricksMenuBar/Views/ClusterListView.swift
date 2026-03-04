@@ -35,7 +35,7 @@ struct ClusterListView: View {
                     ScrollView {
                         LazyVStack(spacing: 2) {
                             ForEach(clusters) { cluster in
-                                ClusterRowView(cluster: cluster)
+                                ClusterRowView(cluster: cluster, baseURL: viewModel.config?.baseURL)
                             }
                         }
                         .padding(.vertical, 4)
