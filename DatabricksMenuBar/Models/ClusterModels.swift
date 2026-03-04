@@ -57,6 +57,12 @@ struct ClusterInfo: Codable, Identifiable {
         return "\(max(1, Int(ceil(seconds / 3600))))h ago"
     }
 
+    var terminatedOver30Days: Bool {
+        guard let terminatedTime, terminatedTime > 0 else { return false }
+        let seconds = Date().timeIntervalSince(Date(timeIntervalSince1970: Double(terminatedTime) / 1000.0))
+        return seconds > 30 * 86400
+    }
+
     var uptimeHours: Int? {
         let ts = lastStartedTime ?? startTime
         guard let ts, ts > 0 else { return nil }

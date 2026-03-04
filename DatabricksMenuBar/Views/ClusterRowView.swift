@@ -114,7 +114,19 @@ struct ClusterRowView: View {
                     if (clusterState == .terminated || clusterState == .terminating),
                        let ago = cluster.terminatedAgoString {
                         let reason = cluster.terminatedBy.map { ", \($0)" } ?? ""
-                        detailRow(label: "Terminated", value: "\(ago)\(reason)")
+                        if cluster.terminatedOver30Days {
+                            HStack(spacing: 6) {
+                                Text("Terminated")
+                                    .font(.caption)
+                                    .foregroundStyle(.tertiary)
+                                    .frame(width: 60, alignment: .trailing)
+                                Text("\(ago)\(reason)")
+                                    .font(.system(size: 11, design: .monospaced))
+                                    .foregroundStyle(.red)
+                            }
+                        } else {
+                            detailRow(label: "Terminated", value: "\(ago)\(reason)")
+                        }
                     }
 
                     // Action buttons
