@@ -9,6 +9,8 @@ struct ClusterRowView: View {
     let onStop: () -> Void
 
     @State private var isHovered = false
+    @State private var showStartConfirm = false
+    @State private var showStopConfirm = false
 
     private var clusterState: ClusterState {
         ClusterState(from: cluster.state)
@@ -93,27 +95,73 @@ struct ClusterRowView: View {
                     // Action buttons
                     HStack(spacing: 8) {
                         if clusterState == .terminated || clusterState == .error {
-                            Button {
-                                onStart()
-                            } label: {
-                                Label("Start", systemImage: "play.fill")
-                                    .font(.caption)
+                            if showStartConfirm {
+                                Button {
+                                    onStart()
+                                    showStartConfirm = false
+                                } label: {
+                                    Label("Sure?", systemImage: "play.fill")
+                                        .font(.caption)
+                                }
+                                .buttonStyle(.borderedProminent)
+                                .tint(.green)
+                                .controlSize(.small)
+
+                                Button {
+                                    showStartConfirm = false
+                                } label: {
+                                    Text("Cancel")
+                                        .font(.caption)
+                                }
+                                .buttonStyle(.bordered)
+                                .controlSize(.small)
+                            } else {
+                                Button {
+                                    showStartConfirm = true
+                                    showStopConfirm = false
+                                } label: {
+                                    Label("Start", systemImage: "play.fill")
+                                        .font(.caption)
+                                }
+                                .buttonStyle(.borderedProminent)
+                                .tint(.green)
+                                .controlSize(.small)
                             }
-                            .buttonStyle(.borderedProminent)
-                            .tint(.green)
-                            .controlSize(.small)
                         }
 
                         if clusterState == .running || clusterState == .pending || clusterState == .restarting || clusterState == .resizing {
-                            Button {
-                                onStop()
-                            } label: {
-                                Label("Stop", systemImage: "stop.fill")
-                                    .font(.caption)
+                            if showStopConfirm {
+                                Button {
+                                    onStop()
+                                    showStopConfirm = false
+                                } label: {
+                                    Label("Sure?", systemImage: "stop.fill")
+                                        .font(.caption)
+                                }
+                                .buttonStyle(.borderedProminent)
+                                .tint(.red)
+                                .controlSize(.small)
+
+                                Button {
+                                    showStopConfirm = false
+                                } label: {
+                                    Text("Cancel")
+                                        .font(.caption)
+                                }
+                                .buttonStyle(.bordered)
+                                .controlSize(.small)
+                            } else {
+                                Button {
+                                    showStopConfirm = true
+                                    showStartConfirm = false
+                                } label: {
+                                    Label("Stop", systemImage: "stop.fill")
+                                        .font(.caption)
+                                }
+                                .buttonStyle(.borderedProminent)
+                                .tint(.red)
+                                .controlSize(.small)
                             }
-                            .buttonStyle(.borderedProminent)
-                            .tint(.red)
-                            .controlSize(.small)
                         }
 
                         if let url = clusterURL {
