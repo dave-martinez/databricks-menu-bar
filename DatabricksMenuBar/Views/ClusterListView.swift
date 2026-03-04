@@ -17,7 +17,14 @@ struct ClusterListView: View {
                             .font(.system(size: 13))
                             .foregroundStyle(.blue)
                     }
-                    .help("Open Databricks")
+                    .help("Open Databricks workspace in browser")
+                    .onHover { hovering in
+                        if hovering {
+                            NSCursor.pointingHand.push()
+                        } else {
+                            NSCursor.pop()
+                        }
+                    }
                 }
             }
             .padding(.horizontal, 12)
