@@ -19,13 +19,6 @@ struct FooterView: View {
                 .foregroundStyle(.blue)
                 .font(.caption)
 
-                if let host = viewModel.config?.databricksHost,
-                   let url = URL(string: host.hasPrefix("https") ? host : "https://\(host)") {
-                    Spacer()
-                    Link("Open Databricks", destination: url)
-                        .font(.caption)
-                }
-
                 Spacer()
 
                 Button("Edit Config") {

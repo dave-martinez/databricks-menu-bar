@@ -10,6 +10,15 @@ struct ClusterListView: View {
                 Text("Databricks Clusters")
                     .font(.headline)
                 Spacer()
+                if let host = viewModel.config?.databricksHost,
+                   let url = URL(string: host.hasPrefix("https") ? host : "https://\(host)") {
+                    Link(destination: url) {
+                        Image(systemName: "globe")
+                            .font(.system(size: 13))
+                            .foregroundStyle(.blue)
+                    }
+                    .help("Open Databricks")
+                }
             }
             .padding(.horizontal, 12)
             .padding(.top, 12)
