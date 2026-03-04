@@ -100,7 +100,7 @@ struct ClusterRowView: View {
                                     onStart()
                                     showStartConfirm = false
                                 } label: {
-                                    Label("Sure?", systemImage: "play.fill")
+                                    Label("Confirm", systemImage: "play.fill")
                                         .font(.caption)
                                 }
                                 .buttonStyle(.borderedProminent)
@@ -135,7 +135,7 @@ struct ClusterRowView: View {
                                     onStop()
                                     showStopConfirm = false
                                 } label: {
-                                    Label("Sure?", systemImage: "stop.fill")
+                                    Label("Confirm", systemImage: "stop.fill")
                                         .font(.caption)
                                 }
                                 .buttonStyle(.borderedProminent)
