@@ -96,8 +96,14 @@ struct ClusterRowView: View {
                     if let spark = cluster.sparkVersion {
                         detailRow(label: "Spark", value: spark)
                     }
+                    if let uptime = cluster.uptimeString {
+                        detailRow(label: "Uptime", value: uptime)
+                    }
                     if let creator = cluster.creatorUserName {
                         detailRow(label: "Creator", value: creator)
+                    }
+                    if let startedBy = cluster.lastRestartedBy {
+                        detailRow(label: "Started by", value: startedBy)
                     }
 
                     // Action buttons

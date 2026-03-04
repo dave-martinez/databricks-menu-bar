@@ -3,6 +3,7 @@ import SwiftUI
 struct ClusterListView: View {
     @ObservedObject var viewModel: ClusterListViewModel
     @State private var expandedClusterId: String?
+    @State private var showAbout = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -51,6 +52,12 @@ struct ClusterListView: View {
                     }
 
                     Divider()
+
+                    Button {
+                        showAbout = true
+                    } label: {
+                        Label("About", systemImage: "info.circle")
+                    }
 
                     Button {
                         NSApplication.shared.terminate(nil)
@@ -142,5 +149,8 @@ struct ClusterListView: View {
             }
         }
         .frame(width: 380, height: 420)
+        .sheet(isPresented: $showAbout) {
+            AboutView()
+        }
     }
 }

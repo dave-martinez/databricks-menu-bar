@@ -14,6 +14,8 @@ struct ClusterInfo: Codable, Identifiable {
     let nodeTypeId: String?
     let numWorkers: Int?
     let autoscale: AutoscaleInfo?
+    let startTime: Int?
+    let lastRestartedBy: String?
 
     var id: String { clusterId }
 
@@ -34,6 +36,19 @@ struct ClusterInfo: Codable, Identifiable {
         return "DBR \(version)"
     }
 
+    var uptimeString: String? {
+        guard let startTime, startTime > 0 else { return nil }
+        let startDate = Date(timeIntervalSince1970: Double(startTime) / 1000.0)
+        let interval = Date().timeIntervalSince(startDate)
+        guard interval > 0 else { return nil }
+        let hours = Int(interval) / 3600
+        let minutes = (Int(interval) % 3600) / 60
+        if hours > 0 {
+            return "\(hours)h \(minutes)m"
+        }
+        return "\(minutes)m"
+    }
+
     enum CodingKeys: String, CodingKey {
         case clusterId = "cluster_id"
         case clusterName = "cluster_name"
@@ -44,6 +59,8 @@ struct ClusterInfo: Codable, Identifiable {
         case nodeTypeId = "node_type_id"
         case numWorkers = "num_workers"
         case autoscale
+        case startTime = "start_time"
+        case lastRestartedBy = "last_restarted_by"
     }
 }
 
