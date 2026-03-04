@@ -40,6 +40,14 @@ struct ClusterInfo: Codable, Identifiable {
         return "DBR \(version)"
     }
 
+    var uptimeHours: Int? {
+        let ts = lastStartedTime ?? startTime
+        guard let ts, ts > 0 else { return nil }
+        let seconds = Date().timeIntervalSince(Date(timeIntervalSince1970: Double(ts) / 1000.0))
+        guard seconds > 0 else { return nil }
+        return max(1, Int(ceil(seconds / 3600)))
+    }
+
     var uptimeString: String? {
         let ts = lastStartedTime ?? startTime
         guard let ts, ts > 0 else { return nil }
