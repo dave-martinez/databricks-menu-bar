@@ -54,20 +54,22 @@ class ClusterListViewModel: ObservableObject {
         do {
             var clusters = try await client.fetchAllPurposeClusters()
 
-            // Fetch last started by in parallel for all clusters
-            await withTaskGroup(of: (String, String?).self) { group in
+            // Fetch last start event in parallel for all clusters
+            await withTaskGroup(of: (String, DatabricksAPIClient.StartEventInfo?).self) { group in
                 for cluster in clusters {
                     group.addTask {
-                        let user = await client.fetchLastStartedBy(clusterId: cluster.clusterId)
-                        return (cluster.clusterId, user)
+                        let info = await client.fetchLastStartEvent(clusterId: cluster.clusterId)
+                        return (cluster.clusterId, info)
                     }
                 }
-                var results: [String: String] = [:]
-                for await (id, user) in group {
-                    if let user { results[id] = user }
+                var results: [String: DatabricksAPIClient.StartEventInfo] = [:]
+                for await (id, info) in group {
+                    if let info { results[id] = info }
                 }
                 for i in clusters.indices {
-                    clusters[i].lastStartedBy = results[clusters[i].clusterId]
+                    let info = results[clusters[i].clusterId]
+                    clusters[i].lastStartedBy = info?.user
+                    clusters[i].lastStartedTime = info?.timestamp
                 }
             }
 

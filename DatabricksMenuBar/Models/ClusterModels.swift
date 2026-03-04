@@ -18,6 +18,8 @@ struct ClusterInfo: Codable, Identifiable {
 
     /// Populated from the events API after fetch
     var lastStartedBy: String?
+    /// Timestamp (epoch ms) from the last STARTING event
+    var lastStartedTime: Int?
 
     var id: String { clusterId }
 
@@ -39,8 +41,9 @@ struct ClusterInfo: Codable, Identifiable {
     }
 
     var uptimeString: String? {
-        guard let startTime, startTime > 0 else { return nil }
-        let startDate = Date(timeIntervalSince1970: Double(startTime) / 1000.0)
+        let ts = lastStartedTime ?? startTime
+        guard let ts, ts > 0 else { return nil }
+        let startDate = Date(timeIntervalSince1970: Double(ts) / 1000.0)
         let interval = Date().timeIntervalSince(startDate)
         guard interval > 0 else { return nil }
         let hours = Int(interval) / 3600
@@ -63,6 +66,7 @@ struct ClusterInfo: Codable, Identifiable {
         case autoscale
         case startTime = "start_time"
         case lastStartedBy = "last_started_by" // not from API, populated locally
+        case lastStartedTime = "last_started_time" // not from API, populated locally
     }
 }
 
@@ -72,6 +76,7 @@ struct ClusterEventsResponse: Codable {
 
 struct ClusterEvent: Codable {
     let type: String?
+    let timestamp: Int?
     let details: ClusterEventDetails?
 }
 

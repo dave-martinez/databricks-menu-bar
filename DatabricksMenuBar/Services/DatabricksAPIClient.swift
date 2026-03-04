@@ -92,7 +92,12 @@ class DatabricksAPIClient {
         }
     }
 
-    func fetchLastStartedBy(clusterId: String) async -> String? {
+    struct StartEventInfo {
+        let user: String?
+        let timestamp: Int?
+    }
+
+    func fetchLastStartEvent(clusterId: String) async -> StartEventInfo? {
         guard let baseURL = config.baseURL else { return nil }
         let url = baseURL.appendingPathComponent("api/2.0/clusters/events")
         var request = URLRequest(url: url)
@@ -110,10 +115,11 @@ class DatabricksAPIClient {
         guard let (data, response) = try? await session.data(for: request),
               let http = response as? HTTPURLResponse,
               (200...299).contains(http.statusCode),
-              let decoded = try? JSONDecoder().decode(ClusterEventsResponse.self, from: data) else {
+              let decoded = try? JSONDecoder().decode(ClusterEventsResponse.self, from: data),
+              let event = decoded.events?.first else {
             return nil
         }
-        return decoded.events?.first?.details?.user
+        return StartEventInfo(user: event.details?.user, timestamp: event.timestamp)
     }
 
     func startCluster(clusterId: String) async throws {
