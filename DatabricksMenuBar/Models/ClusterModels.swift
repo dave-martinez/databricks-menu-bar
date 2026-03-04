@@ -20,6 +20,10 @@ struct ClusterInfo: Codable, Identifiable {
     var lastStartedBy: String?
     /// Timestamp (epoch ms) from the last STARTING event
     var lastStartedTime: Int?
+    /// Timestamp (epoch ms) from the last TERMINATING event
+    var terminatedTime: Int?
+    /// Who/what terminated: user email or "auto"
+    var terminatedBy: String?
 
     var id: String { clusterId }
 
@@ -38,6 +42,13 @@ struct ClusterInfo: Codable, Identifiable {
         let parts = sparkVersion.split(separator: "-").first ?? Substring(sparkVersion)
         let version = parts.replacingOccurrences(of: ".x", with: "")
         return "DBR \(version)"
+    }
+
+    var terminatedAgoHours: Int? {
+        guard let terminatedTime, terminatedTime > 0 else { return nil }
+        let seconds = Date().timeIntervalSince(Date(timeIntervalSince1970: Double(terminatedTime) / 1000.0))
+        guard seconds > 0 else { return nil }
+        return max(1, Int(ceil(seconds / 3600)))
     }
 
     var uptimeHours: Int? {
@@ -75,6 +86,8 @@ struct ClusterInfo: Codable, Identifiable {
         case startTime = "start_time"
         case lastStartedBy = "last_started_by" // not from API, populated locally
         case lastStartedTime = "last_started_time" // not from API, populated locally
+        case terminatedTime = "terminated_time" // not from API, populated locally
+        case terminatedBy = "terminated_by" // not from API, populated locally
     }
 }
 
@@ -90,6 +103,16 @@ struct ClusterEvent: Codable {
 
 struct ClusterEventDetails: Codable {
     let user: String?
+    let reason: ClusterEventReason?
+}
+
+struct ClusterEventReason: Codable {
+    let code: String?
+    let parameters: ClusterEventParameters?
+}
+
+struct ClusterEventParameters: Codable {
+    let username: String?
 }
 
 struct AutoscaleInfo: Codable {

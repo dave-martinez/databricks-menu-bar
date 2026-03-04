@@ -54,22 +54,36 @@ class ClusterListViewModel: ObservableObject {
         do {
             var clusters = try await client.fetchAllPurposeClusters()
 
-            // Fetch last start event in parallel for all clusters
-            await withTaskGroup(of: (String, DatabricksAPIClient.StartEventInfo?).self) { group in
+            // Fetch events in parallel for all clusters
+            enum EventResult {
+                case start(String, DatabricksAPIClient.StartEventInfo?)
+                case terminated(String, DatabricksAPIClient.TerminatedEventInfo?)
+            }
+            await withTaskGroup(of: EventResult.self) { group in
                 for cluster in clusters {
-                    group.addTask {
-                        let info = await client.fetchLastStartEvent(clusterId: cluster.clusterId)
-                        return (cluster.clusterId, info)
+                    let id = cluster.clusterId
+                    let state = ClusterState(from: cluster.state)
+                    group.addTask { .start(id, await client.fetchLastStartEvent(clusterId: id)) }
+                    if state == .terminated || state == .terminating {
+                        group.addTask { .terminated(id, await client.fetchLastTerminatedEvent(clusterId: id)) }
                     }
                 }
-                var results: [String: DatabricksAPIClient.StartEventInfo] = [:]
-                for await (id, info) in group {
-                    if let info { results[id] = info }
+                var startResults: [String: DatabricksAPIClient.StartEventInfo] = [:]
+                var termResults: [String: DatabricksAPIClient.TerminatedEventInfo] = [:]
+                for await result in group {
+                    switch result {
+                    case .start(let id, let info): if let info { startResults[id] = info }
+                    case .terminated(let id, let info): if let info { termResults[id] = info }
+                    }
                 }
                 for i in clusters.indices {
-                    let info = results[clusters[i].clusterId]
-                    clusters[i].lastStartedBy = info?.user
-                    clusters[i].lastStartedTime = info?.timestamp
+                    let id = clusters[i].clusterId
+                    let start = startResults[id]
+                    clusters[i].lastStartedBy = start?.user
+                    clusters[i].lastStartedTime = start?.timestamp
+                    let term = termResults[id]
+                    clusters[i].terminatedTime = term?.timestamp
+                    clusters[i].terminatedBy = term?.terminatedBy
                 }
             }
 

@@ -97,7 +97,34 @@ class DatabricksAPIClient {
         let timestamp: Int?
     }
 
+    struct TerminatedEventInfo {
+        let timestamp: Int?
+        let terminatedBy: String? // user email or "auto"
+    }
+
     func fetchLastStartEvent(clusterId: String) async -> StartEventInfo? {
+        guard let event = await fetchLastEvent(clusterId: clusterId, eventType: "STARTING") else {
+            return nil
+        }
+        return StartEventInfo(user: event.details?.user, timestamp: event.timestamp)
+    }
+
+    func fetchLastTerminatedEvent(clusterId: String) async -> TerminatedEventInfo? {
+        guard let event = await fetchLastEvent(clusterId: clusterId, eventType: "TERMINATING") else {
+            return nil
+        }
+        let by: String?
+        if let username = event.details?.reason?.parameters?.username {
+            by = username
+        } else if let code = event.details?.reason?.code, code == "INACTIVITY" {
+            by = "auto"
+        } else {
+            by = event.details?.reason?.code?.lowercased()
+        }
+        return TerminatedEventInfo(timestamp: event.timestamp, terminatedBy: by)
+    }
+
+    private func fetchLastEvent(clusterId: String, eventType: String) async -> ClusterEvent? {
         guard let baseURL = config.baseURL else { return nil }
         let url = baseURL.appendingPathComponent("api/2.0/clusters/events")
         var request = URLRequest(url: url)
@@ -108,9 +135,9 @@ class DatabricksAPIClient {
         struct EventsRequest: Encodable {
             let cluster_id: String
             let limit: Int = 1
-            let event_types: [String] = ["STARTING"]
+            let event_types: [String]
         }
-        request.httpBody = try? JSONEncoder().encode(EventsRequest(cluster_id: clusterId))
+        request.httpBody = try? JSONEncoder().encode(EventsRequest(cluster_id: clusterId, event_types: [eventType]))
 
         guard let (data, response) = try? await session.data(for: request),
               let http = response as? HTTPURLResponse,
@@ -119,7 +146,7 @@ class DatabricksAPIClient {
               let event = decoded.events?.first else {
             return nil
         }
-        return StartEventInfo(user: event.details?.user, timestamp: event.timestamp)
+        return event
     }
 
     func startCluster(clusterId: String) async throws {

@@ -59,6 +59,19 @@ struct ClusterRowView: View {
                         .foregroundStyle(.tertiary)
                 }
 
+                if clusterState == .terminated, let hours = cluster.terminatedAgoHours {
+                    Text("\(hours)h ago")
+                        .font(.caption)
+                        .foregroundStyle(.tertiary)
+                }
+
+                if clusterState == .terminated, let by = cluster.terminatedBy {
+                    Text(by)
+                        .font(.caption)
+                        .foregroundStyle(.tertiary)
+                        .lineLimit(1)
+                }
+
                 Text(clusterState.displayName)
                     .font(.caption)
                     .foregroundStyle(.secondary)
