@@ -13,12 +13,16 @@ struct ClusterRowView: View {
 
     private var clusterURL: URL? {
         guard let baseURL else { return nil }
-        return baseURL.appendingPathComponent("compute/clusters/\(cluster.clusterId)")
+        var components = URLComponents(url: baseURL, resolvingAgainstBaseURL: false)
+        components?.path = "/compute/clusters/\(cluster.clusterId)"
+        return components?.url
     }
 
-    private var sparkURL: URL? {
+    private var sparkUIURL: URL? {
         guard let baseURL else { return nil }
-        return baseURL.appendingPathComponent("compute/clusters/\(cluster.clusterId)/sparkUi")
+        var components = URLComponents(url: baseURL, resolvingAgainstBaseURL: false)
+        components?.path = "/compute/clusters/\(cluster.clusterId)/sparkUi"
+        return components?.url
     }
 
     var body: some View {
@@ -98,7 +102,7 @@ struct ClusterRowView: View {
                             .controlSize(.small)
                         }
 
-                        if clusterState == .running, let url = sparkURL {
+                        if clusterState == .running, let url = sparkUIURL {
                             Button {
                                 NSWorkspace.shared.open(url)
                             } label: {
