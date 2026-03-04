@@ -20,3 +20,19 @@ build/
 *.ipa
 *.dSYM.zip
 *.dSYM
+*.dmg
+
+# Secrets / credentials — never commit these
+config.json
+.env
+.env.*
+*.secret
+credentials.json
+secrets.json
+
+# Xcode generated
+xcuserdata/
+*.xcworkspace/xcshareddata/swiftpm/configuration/
+
+# Backup files from filter-branch
+refs/original/
