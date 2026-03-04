@@ -4,7 +4,9 @@ struct ClusterRowView: View {
     let cluster: ClusterInfo
     let baseURL: URL?
     let isExpanded: Bool
+    let isPinned: Bool
     let onToggle: () -> Void
+    let onPin: () -> Void
     let onStart: () -> Void
     let onStop: () -> Void
 
@@ -37,6 +39,12 @@ struct ClusterRowView: View {
                 Circle()
                     .fill(clusterState.color)
                     .frame(width: 10, height: 10)
+
+                if isPinned {
+                    Image(systemName: "pin.fill")
+                        .font(.system(size: 9))
+                        .foregroundStyle(.orange)
+                }
 
                 Text(cluster.clusterName)
                     .font(.system(.body, design: .default))
@@ -163,6 +171,15 @@ struct ClusterRowView: View {
                                 .controlSize(.small)
                             }
                         }
+
+                        Button {
+                            onPin()
+                        } label: {
+                            Label(isPinned ? "Unpin" : "Pin", systemImage: isPinned ? "pin.slash" : "pin")
+                                .font(.caption)
+                        }
+                        .buttonStyle(.bordered)
+                        .controlSize(.small)
 
                         if let url = clusterURL {
                             Button {

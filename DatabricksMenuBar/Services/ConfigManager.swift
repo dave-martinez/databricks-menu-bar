@@ -31,6 +31,10 @@ class ConfigManager {
         configDirectory.appendingPathComponent("config.json")
     }()
 
+    static let pinnedFilePath: URL = {
+        configDirectory.appendingPathComponent("pinned.json")
+    }()
+
     func loadConfig() throws -> AppConfig {
         let path = Self.configFilePath
         guard FileManager.default.fileExists(atPath: path.path) else {
@@ -66,5 +70,20 @@ class ConfigManager {
         }
 
         NSWorkspace.shared.open(filePath)
+    }
+
+    func loadPinnedIds() -> Set<String> {
+        guard let data = try? Data(contentsOf: Self.pinnedFilePath),
+              let ids = try? JSONDecoder().decode([String].self, from: data) else {
+            return []
+        }
+        return Set(ids)
+    }
+
+    func savePinnedIds(_ ids: Set<String>) {
+        try? FileManager.default.createDirectory(at: Self.configDirectory, withIntermediateDirectories: true)
+        if let data = try? JSONEncoder().encode(Array(ids)) {
+            try? data.write(to: Self.pinnedFilePath)
+        }
     }
 }

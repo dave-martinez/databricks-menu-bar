@@ -12,6 +12,7 @@ class ClusterListViewModel: ObservableObject {
 
     @Published var viewState: ViewState = .loading
     @Published var lastRefreshed: Date?
+    @Published var pinnedIds: Set<String> = []
 
     private(set) var config: AppConfig?
     private var timer: Timer?
@@ -19,7 +20,21 @@ class ClusterListViewModel: ObservableObject {
     private let configManager = ConfigManager()
 
     init() {
+        pinnedIds = configManager.loadPinnedIds()
         loadConfigAndStart()
+    }
+
+    func isPinned(_ clusterId: String) -> Bool {
+        pinnedIds.contains(clusterId)
+    }
+
+    func togglePin(_ clusterId: String) {
+        if pinnedIds.contains(clusterId) {
+            pinnedIds.remove(clusterId)
+        } else {
+            pinnedIds.insert(clusterId)
+        }
+        configManager.savePinnedIds(pinnedIds)
     }
 
     func loadConfigAndStart() {
@@ -37,7 +52,14 @@ class ClusterListViewModel: ObservableObject {
     func refresh() async {
         guard let client = apiClient else { return }
         do {
-            let clusters = try await client.fetchAllPurposeClusters()
+            var clusters = try await client.fetchAllPurposeClusters()
+            // Pinned clusters sort to the top, preserving existing order within each group
+            clusters.sort { a, b in
+                let aPinned = pinnedIds.contains(a.clusterId)
+                let bPinned = pinnedIds.contains(b.clusterId)
+                if aPinned != bPinned { return aPinned }
+                return false
+            }
             self.viewState = .loaded(clusters: clusters)
             self.lastRefreshed = Date()
         } catch {

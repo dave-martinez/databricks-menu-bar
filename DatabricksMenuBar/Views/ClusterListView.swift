@@ -102,10 +102,15 @@ struct ClusterListView: View {
                                     cluster: cluster,
                                     baseURL: viewModel.config?.baseURL,
                                     isExpanded: expandedClusterId == cluster.clusterId,
+                                    isPinned: viewModel.isPinned(cluster.clusterId),
                                     onToggle: {
                                         withAnimation(.easeInOut(duration: 0.2)) {
                                             expandedClusterId = expandedClusterId == cluster.clusterId ? nil : cluster.clusterId
                                         }
+                                    },
+                                    onPin: {
+                                        viewModel.togglePin(cluster.clusterId)
+                                        viewModel.manualRefresh()
                                     },
                                     onStart: { viewModel.startCluster(cluster.clusterId) },
                                     onStop: { viewModel.stopCluster(cluster.clusterId) }
