@@ -11,6 +11,7 @@ struct ClusterInfo: Codable, Identifiable {
     let clusterSource: String?
     let creatorUserName: String?
     let sparkVersion: String?
+    let stateMessage: String?
     let nodeTypeId: String?
     let numWorkers: Int?
     let autoscale: AutoscaleInfo?
@@ -90,6 +91,7 @@ struct ClusterInfo: Codable, Identifiable {
         case clusterName = "cluster_name"
         case state
         case clusterSource = "cluster_source"
+        case stateMessage = "state_message"
         case creatorUserName = "creator_user_name"
         case sparkVersion = "spark_version"
         case nodeTypeId = "node_type_id"

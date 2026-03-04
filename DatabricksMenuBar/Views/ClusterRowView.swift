@@ -106,6 +106,9 @@ struct ClusterRowView: View {
                     if let creator = cluster.creatorUserName {
                         detailRow(label: "Creator", value: creator)
                     }
+                    if let msg = cluster.stateMessage, !msg.isEmpty {
+                        detailRow(label: "Status", value: msg)
+                    }
                     if clusterState != .terminated && clusterState != .terminating,
                        let uptime = cluster.uptimeString {
                         let startedBy = cluster.lastStartedBy.map { " by \($0)" } ?? ""
