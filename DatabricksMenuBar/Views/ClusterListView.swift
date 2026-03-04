@@ -6,7 +6,7 @@ struct ClusterListView: View {
     var body: some View {
         VStack(spacing: 0) {
             // Header
-            HStack {
+            HStack(spacing: 8) {
                 Text("Databricks Clusters")
                     .font(.headline)
                 Spacer()
@@ -123,6 +123,6 @@ struct ClusterListView: View {
                     .padding(.vertical, 6)
             }
         }
-        .frame(width: 320, height: 400)
+        .frame(width: 380, height: 420)
     }
 }
