@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct AboutView: View {
+    @Environment(\.dismiss) private var dismiss
+
     var body: some View {
         VStack(spacing: 12) {
             Image(systemName: "server.rack")
@@ -32,6 +34,13 @@ struct AboutView: View {
                 Link("GitHub", destination: URL(string: "https://github.com/dave-martinez/databricks-menu-bar")!)
                     .font(.caption)
             }
+
+            Button("Close") {
+                dismiss()
+            }
+            .buttonStyle(.bordered)
+            .controlSize(.small)
+            .padding(.top, 4)
         }
         .padding(20)
         .frame(width: 240)
