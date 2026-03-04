@@ -21,7 +21,7 @@ struct ClusterRowView: View {
     private var sparkUIURL: URL? {
         guard let baseURL else { return nil }
         var components = URLComponents(url: baseURL, resolvingAgainstBaseURL: false)
-        components?.path = "/compute/clusters/\(cluster.clusterId)/sparkUi"
+        components?.path = "/compute/clusters/\(cluster.clusterId)/spark-ui"
         return components?.url
     }
 
