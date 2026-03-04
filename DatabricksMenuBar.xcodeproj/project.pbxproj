@@ -14,6 +14,7 @@
 		77190C57AAE28D95F4C89A36 /* DatabricksMenuBarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80B8E75B36B64CE1CF5C8B9 /* DatabricksMenuBarApp.swift */; };
 		A23E8EB74474302D629917C5 /* ClusterListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EF343EA3979B7148B0DDC /* ClusterListViewModel.swift */; };
 		A25CD8E56760FE1BE9EB2F7E /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED9710BD8578ADF1FB80EE3 /* FooterView.swift */; };
+		A78561A223E5A4EF57534EDD /* StatusSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEB0383CAA3CEBF2F976BF8 /* StatusSummaryView.swift */; };
 		B50E155304D60045D385B30A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE708D07DA574EF920F20AD5 /* Assets.xcassets */; };
 		B9612EF5C414332FFA3C36B7 /* ErrorStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EAC04DB738A97BE17A2313 /* ErrorStateView.swift */; };
 		CC7E1517B9FA5537AB9A0ED4 /* ClusterModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8ADECC167D277AA4A92F057 /* ClusterModels.swift */; };
@@ -25,6 +26,7 @@
 		0E95494C749A3B92F9643AD5 /* DatabricksMenuBar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DatabricksMenuBar.entitlements; sourceTree = "<group>"; };
 		1C79F28E3543E13F3745E0FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		276693A48B37BFC18B391F31 /* ClusterState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterState.swift; sourceTree = "<group>"; };
+		4FEB0383CAA3CEBF2F976BF8 /* StatusSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusSummaryView.swift; sourceTree = "<group>"; };
 		587EDB829F0221CFAED4FB00 /* ClusterListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterListView.swift; sourceTree = "<group>"; };
 		5DA780AE9A5C341C61672B2A /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		70B70201538D618DC4F699DB /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 				C92647C5AD5976F39FE60C6D /* ClusterRowView.swift */,
 				F5EAC04DB738A97BE17A2313 /* ErrorStateView.swift */,
 				BED9710BD8578ADF1FB80EE3 /* FooterView.swift */,
+				4FEB0383CAA3CEBF2F976BF8 /* StatusSummaryView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -190,6 +193,7 @@
 				77190C57AAE28D95F4C89A36 /* DatabricksMenuBarApp.swift in Sources */,
 				B9612EF5C414332FFA3C36B7 /* ErrorStateView.swift in Sources */,
 				A25CD8E56760FE1BE9EB2F7E /* FooterView.swift in Sources */,
+				A78561A223E5A4EF57534EDD /* StatusSummaryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

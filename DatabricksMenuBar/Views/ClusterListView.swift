@@ -48,6 +48,13 @@ struct ClusterListView: View {
                         .padding()
                     Spacer()
                 } else {
+                    // Status summary
+                    StatusSummaryView(clusters: clusters)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 6)
+
+                    Divider()
+
                     ScrollView {
                         LazyVStack(spacing: 2) {
                             ForEach(clusters) { cluster in
