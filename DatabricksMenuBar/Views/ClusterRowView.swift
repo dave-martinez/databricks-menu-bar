@@ -3,10 +3,11 @@ import SwiftUI
 struct ClusterRowView: View {
     let cluster: ClusterInfo
     let baseURL: URL?
+    let isExpanded: Bool
+    let onToggle: () -> Void
     let onStart: () -> Void
     let onStop: () -> Void
 
-    @State private var isExpanded = false
     @State private var isHovered = false
 
     private var clusterState: ClusterState {
@@ -57,9 +58,7 @@ struct ClusterRowView: View {
             )
             .contentShape(Rectangle())
             .onTapGesture {
-                withAnimation(.easeInOut(duration: 0.2)) {
-                    isExpanded.toggle()
-                }
+                onToggle()
             }
             .onHover { hovering in
                 isHovered = hovering

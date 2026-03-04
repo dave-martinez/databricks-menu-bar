@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ClusterListView: View {
     @ObservedObject var viewModel: ClusterListViewModel
+    @State private var expandedClusterId: String?
 
     var body: some View {
         VStack(spacing: 0) {
@@ -100,6 +101,12 @@ struct ClusterListView: View {
                                 ClusterRowView(
                                     cluster: cluster,
                                     baseURL: viewModel.config?.baseURL,
+                                    isExpanded: expandedClusterId == cluster.clusterId,
+                                    onToggle: {
+                                        withAnimation(.easeInOut(duration: 0.2)) {
+                                            expandedClusterId = expandedClusterId == cluster.clusterId ? nil : cluster.clusterId
+                                        }
+                                    },
                                     onStart: { viewModel.startCluster(cluster.clusterId) },
                                     onStop: { viewModel.stopCluster(cluster.clusterId) }
                                 )
