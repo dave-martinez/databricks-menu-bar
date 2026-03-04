@@ -117,7 +117,7 @@ class DatabricksAPIClient {
         if let username = event.details?.reason?.parameters?.username {
             by = username
         } else if let code = event.details?.reason?.code, code == "INACTIVITY" {
-            by = "auto"
+            by = "due to inactivity"
         } else {
             by = event.details?.reason?.code?.lowercased()
         }
