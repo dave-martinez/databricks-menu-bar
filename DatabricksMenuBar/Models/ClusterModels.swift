@@ -44,11 +44,17 @@ struct ClusterInfo: Codable, Identifiable {
         return "DBR \(version)"
     }
 
-    var terminatedAgoHours: Int? {
+    var terminatedAgoString: String? {
         guard let terminatedTime, terminatedTime > 0 else { return nil }
-        let seconds = Date().timeIntervalSince(Date(timeIntervalSince1970: Double(terminatedTime) / 1000.0))
+        let date = Date(timeIntervalSince1970: Double(terminatedTime) / 1000.0)
+        let seconds = Date().timeIntervalSince(date)
         guard seconds > 0 else { return nil }
-        return max(1, Int(ceil(seconds / 3600)))
+        if seconds > 86400 {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "dd-MM-yyyy"
+            return formatter.string(from: date)
+        }
+        return "\(max(1, Int(ceil(seconds / 3600))))h ago"
     }
 
     var uptimeHours: Int? {

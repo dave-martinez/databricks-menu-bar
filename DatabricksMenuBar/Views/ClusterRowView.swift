@@ -112,9 +112,9 @@ struct ClusterRowView: View {
                         detailRow(label: "Uptime", value: "\(uptime)\(startedBy)")
                     }
                     if (clusterState == .terminated || clusterState == .terminating),
-                       let hours = cluster.terminatedAgoHours {
+                       let ago = cluster.terminatedAgoString {
                         let reason = cluster.terminatedBy.map { ", \($0)" } ?? ""
-                        detailRow(label: "Terminated", value: "\(hours)h ago\(reason)")
+                        detailRow(label: "Terminated", value: "\(ago)\(reason)")
                     }
 
                     // Action buttons
