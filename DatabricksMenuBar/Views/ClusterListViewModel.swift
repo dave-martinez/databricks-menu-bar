@@ -58,6 +58,24 @@ class ClusterListViewModel: ObservableObject {
         configManager.openConfigInEditor()
     }
 
+    func startCluster(_ clusterId: String) {
+        guard let client = apiClient else { return }
+        Task {
+            try? await client.startCluster(clusterId: clusterId)
+            try? await Task.sleep(nanoseconds: 1_000_000_000)
+            await refresh()
+        }
+    }
+
+    func stopCluster(_ clusterId: String) {
+        guard let client = apiClient else { return }
+        Task {
+            try? await client.stopCluster(clusterId: clusterId)
+            try? await Task.sleep(nanoseconds: 1_000_000_000)
+            await refresh()
+        }
+    }
+
     private func startPolling(interval: TimeInterval) {
         stopPolling()
         timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { [weak self] _ in

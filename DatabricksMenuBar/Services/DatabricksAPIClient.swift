@@ -91,4 +91,42 @@ class DatabricksAPIClient {
             return $0.clusterName.localizedCaseInsensitiveCompare($1.clusterName) == .orderedAscending
         }
     }
+
+    func startCluster(clusterId: String) async throws {
+        try await postClusterAction(endpoint: "api/2.0/clusters/start", clusterId: clusterId)
+    }
+
+    func stopCluster(clusterId: String) async throws {
+        try await postClusterAction(endpoint: "api/2.0/clusters/delete", clusterId: clusterId)
+    }
+
+    private func postClusterAction(endpoint: String, clusterId: String) async throws {
+        guard let baseURL = config.baseURL else {
+            throw APIError.invalidURL
+        }
+
+        let url = baseURL.appendingPathComponent(endpoint)
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("Bearer \(config.databricksToken)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try JSONEncoder().encode(["cluster_id": clusterId])
+
+        let data: Data
+        let response: URLResponse
+        do {
+            (data, response) = try await session.data(for: request)
+        } catch {
+            throw APIError.networkError(underlying: error)
+        }
+
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw APIError.invalidURL
+        }
+
+        guard (200...299).contains(httpResponse.statusCode) else {
+            let body = String(data: data, encoding: .utf8)
+            throw APIError.httpError(statusCode: httpResponse.statusCode, body: body)
+        }
+    }
 }

@@ -3,6 +3,8 @@ import SwiftUI
 struct ClusterRowView: View {
     let cluster: ClusterInfo
     let baseURL: URL?
+    let onStart: () -> Void
+    let onStop: () -> Void
 
     @State private var isExpanded = false
     @State private var isHovered = false
@@ -91,14 +93,38 @@ struct ClusterRowView: View {
 
                     // Action buttons
                     HStack(spacing: 8) {
+                        if clusterState == .terminated || clusterState == .error {
+                            Button {
+                                onStart()
+                            } label: {
+                                Label("Start", systemImage: "play.fill")
+                                    .font(.caption)
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .tint(.green)
+                            .controlSize(.small)
+                        }
+
+                        if clusterState == .running || clusterState == .pending || clusterState == .restarting || clusterState == .resizing {
+                            Button {
+                                onStop()
+                            } label: {
+                                Label("Stop", systemImage: "stop.fill")
+                                    .font(.caption)
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .tint(.red)
+                            .controlSize(.small)
+                        }
+
                         if let url = clusterURL {
                             Button {
                                 NSWorkspace.shared.open(url)
                             } label: {
-                                Label("Open in Databricks", systemImage: "globe")
+                                Label("Databricks", systemImage: "globe")
                                     .font(.caption)
                             }
-                            .buttonStyle(.borderedProminent)
+                            .buttonStyle(.bordered)
                             .controlSize(.small)
                         }
 
