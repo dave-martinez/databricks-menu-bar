@@ -92,6 +92,30 @@ class DatabricksAPIClient {
         }
     }
 
+    func fetchLastStartedBy(clusterId: String) async -> String? {
+        guard let baseURL = config.baseURL else { return nil }
+        let url = baseURL.appendingPathComponent("api/2.0/clusters/events")
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("Bearer \(config.databricksToken)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        struct EventsRequest: Encodable {
+            let cluster_id: String
+            let limit: Int = 1
+            let event_types: [String] = ["STARTING"]
+        }
+        request.httpBody = try? JSONEncoder().encode(EventsRequest(cluster_id: clusterId))
+
+        guard let (data, response) = try? await session.data(for: request),
+              let http = response as? HTTPURLResponse,
+              (200...299).contains(http.statusCode),
+              let decoded = try? JSONDecoder().decode(ClusterEventsResponse.self, from: data) else {
+            return nil
+        }
+        return decoded.events?.first?.details?.user
+    }
+
     func startCluster(clusterId: String) async throws {
         try await postClusterAction(endpoint: "api/2.0/clusters/start", clusterId: clusterId)
     }

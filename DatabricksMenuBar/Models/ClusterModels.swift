@@ -15,7 +15,9 @@ struct ClusterInfo: Codable, Identifiable {
     let numWorkers: Int?
     let autoscale: AutoscaleInfo?
     let startTime: Int?
-    let lastRestartedBy: String?
+
+    /// Populated from the events API after fetch
+    var lastStartedBy: String?
 
     var id: String { clusterId }
 
@@ -60,8 +62,21 @@ struct ClusterInfo: Codable, Identifiable {
         case numWorkers = "num_workers"
         case autoscale
         case startTime = "start_time"
-        case lastRestartedBy = "last_restarted_by"
+        case lastStartedBy = "last_started_by" // not from API, populated locally
     }
+}
+
+struct ClusterEventsResponse: Codable {
+    let events: [ClusterEvent]?
+}
+
+struct ClusterEvent: Codable {
+    let type: String?
+    let details: ClusterEventDetails?
+}
+
+struct ClusterEventDetails: Codable {
+    let user: String?
 }
 
 struct AutoscaleInfo: Codable {

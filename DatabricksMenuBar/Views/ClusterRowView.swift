@@ -100,7 +100,7 @@ struct ClusterRowView: View {
                         detailRow(label: "Creator", value: creator)
                     }
                     if let uptime = cluster.uptimeString {
-                        let startedBy = cluster.lastRestartedBy.map { " by \($0)" } ?? ""
+                        let startedBy = cluster.lastStartedBy.map { " by \($0)" } ?? ""
                         detailRow(label: "Uptime", value: "\(uptime)\(startedBy)")
                     }
 

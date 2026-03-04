@@ -53,6 +53,24 @@ class ClusterListViewModel: ObservableObject {
         guard let client = apiClient else { return }
         do {
             var clusters = try await client.fetchAllPurposeClusters()
+
+            // Fetch last started by in parallel for all clusters
+            await withTaskGroup(of: (String, String?).self) { group in
+                for cluster in clusters {
+                    group.addTask {
+                        let user = await client.fetchLastStartedBy(clusterId: cluster.clusterId)
+                        return (cluster.clusterId, user)
+                    }
+                }
+                var results: [String: String] = [:]
+                for await (id, user) in group {
+                    if let user { results[id] = user }
+                }
+                for i in clusters.indices {
+                    clusters[i].lastStartedBy = results[clusters[i].clusterId]
+                }
+            }
+
             // Pinned clusters sort to the top, preserving existing order within each group
             clusters.sort { a, b in
                 let aPinned = pinnedIds.contains(a.clusterId)
