@@ -52,7 +52,8 @@ struct ClusterRowView: View {
 
                 Spacer()
 
-                if let hours = cluster.uptimeHours {
+                if clusterState != .terminated && clusterState != .terminating,
+                   let hours = cluster.uptimeHours {
                     Text("\(hours)h")
                         .font(.caption)
                         .foregroundStyle(.tertiary)
