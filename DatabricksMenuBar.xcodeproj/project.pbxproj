@@ -1,0 +1,384 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		22631E5651B087DA603808AA /* ClusterListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587EDB829F0221CFAED4FB00 /* ClusterListView.swift */; };
+		2C6F8D23971FC4E87A8FB3AC /* ClusterState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276693A48B37BFC18B391F31 /* ClusterState.swift */; };
+		45B594A7538BBBBE6B233440 /* ClusterRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92647C5AD5976F39FE60C6D /* ClusterRowView.swift */; };
+		6936F9276780634E19F2CF7E /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B70201538D618DC4F699DB /* ConfigManager.swift */; };
+		77190C57AAE28D95F4C89A36 /* DatabricksMenuBarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80B8E75B36B64CE1CF5C8B9 /* DatabricksMenuBarApp.swift */; };
+		A23E8EB74474302D629917C5 /* ClusterListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796EF343EA3979B7148B0DDC /* ClusterListViewModel.swift */; };
+		A25CD8E56760FE1BE9EB2F7E /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED9710BD8578ADF1FB80EE3 /* FooterView.swift */; };
+		B50E155304D60045D385B30A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE708D07DA574EF920F20AD5 /* Assets.xcassets */; };
+		B9612EF5C414332FFA3C36B7 /* ErrorStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EAC04DB738A97BE17A2313 /* ErrorStateView.swift */; };
+		CC7E1517B9FA5537AB9A0ED4 /* ClusterModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8ADECC167D277AA4A92F057 /* ClusterModels.swift */; };
+		D7FA085CAC5159822016B9DA /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA780AE9A5C341C61672B2A /* AppConfig.swift */; };
+		E21AE54F7B59FA251E36D9E1 /* DatabricksAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E525F346BBD932F55FF974D /* DatabricksAPIClient.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0E95494C749A3B92F9643AD5 /* DatabricksMenuBar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DatabricksMenuBar.entitlements; sourceTree = "<group>"; };
+		1C79F28E3543E13F3745E0FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		276693A48B37BFC18B391F31 /* ClusterState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterState.swift; sourceTree = "<group>"; };
+		587EDB829F0221CFAED4FB00 /* ClusterListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterListView.swift; sourceTree = "<group>"; };
+		5DA780AE9A5C341C61672B2A /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		70B70201538D618DC4F699DB /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
+		796EF343EA3979B7148B0DDC /* ClusterListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterListViewModel.swift; sourceTree = "<group>"; };
+		9E525F346BBD932F55FF974D /* DatabricksAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabricksAPIClient.swift; sourceTree = "<group>"; };
+		B8ADECC167D277AA4A92F057 /* ClusterModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterModels.swift; sourceTree = "<group>"; };
+		BED9710BD8578ADF1FB80EE3 /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
+		C36C29FD9094817469A3A309 /* DatabricksMenuBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DatabricksMenuBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C92647C5AD5976F39FE60C6D /* ClusterRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterRowView.swift; sourceTree = "<group>"; };
+		DE708D07DA574EF920F20AD5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E80B8E75B36B64CE1CF5C8B9 /* DatabricksMenuBarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabricksMenuBarApp.swift; sourceTree = "<group>"; };
+		F5EAC04DB738A97BE17A2313 /* ErrorStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorStateView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		3E767680AB0406B69DABB28D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C36C29FD9094817469A3A309 /* DatabricksMenuBar.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		536D64D8DC9C474DE5424F1E = {
+			isa = PBXGroup;
+			children = (
+				FBF955CC6B9DEFE1BA27E0F3 /* DatabricksMenuBar */,
+				3E767680AB0406B69DABB28D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		63DC42943F316B9C30D318DD /* App */ = {
+			isa = PBXGroup;
+			children = (
+				E80B8E75B36B64CE1CF5C8B9 /* DatabricksMenuBarApp.swift */,
+				1C79F28E3543E13F3745E0FA /* Info.plist */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		934EB04D08EFCE8127A4D2FD /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				70B70201538D618DC4F699DB /* ConfigManager.swift */,
+				9E525F346BBD932F55FF974D /* DatabricksAPIClient.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		9CBCBF12B4AB4726B534321B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				587EDB829F0221CFAED4FB00 /* ClusterListView.swift */,
+				796EF343EA3979B7148B0DDC /* ClusterListViewModel.swift */,
+				C92647C5AD5976F39FE60C6D /* ClusterRowView.swift */,
+				F5EAC04DB738A97BE17A2313 /* ErrorStateView.swift */,
+				BED9710BD8578ADF1FB80EE3 /* FooterView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		AAF61FE195C075679B5D8F3E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5DA780AE9A5C341C61672B2A /* AppConfig.swift */,
+				B8ADECC167D277AA4A92F057 /* ClusterModels.swift */,
+				276693A48B37BFC18B391F31 /* ClusterState.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		FBF955CC6B9DEFE1BA27E0F3 /* DatabricksMenuBar */ = {
+			isa = PBXGroup;
+			children = (
+				DE708D07DA574EF920F20AD5 /* Assets.xcassets */,
+				0E95494C749A3B92F9643AD5 /* DatabricksMenuBar.entitlements */,
+				63DC42943F316B9C30D318DD /* App */,
+				AAF61FE195C075679B5D8F3E /* Models */,
+				934EB04D08EFCE8127A4D2FD /* Services */,
+				9CBCBF12B4AB4726B534321B /* Views */,
+			);
+			path = DatabricksMenuBar;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		ACBC6E4F098673173BF880EA /* DatabricksMenuBar */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8FF4F1CEFEA1D9F967052C3E /* Build configuration list for PBXNativeTarget "DatabricksMenuBar" */;
+			buildPhases = (
+				4583BCD370757D45DAFA2246 /* Sources */,
+				D13C0F7057F1662619DD6420 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DatabricksMenuBar;
+			packageProductDependencies = (
+			);
+			productName = DatabricksMenuBar;
+			productReference = C36C29FD9094817469A3A309 /* DatabricksMenuBar.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		42DE3FDEA2283DDF2D1ECAFE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					ACBC6E4F098673173BF880EA = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = A8536E4CB93F93BBED4F6950 /* Build configuration list for PBXProject "DatabricksMenuBar" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 536D64D8DC9C474DE5424F1E;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ACBC6E4F098673173BF880EA /* DatabricksMenuBar */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D13C0F7057F1662619DD6420 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B50E155304D60045D385B30A /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4583BCD370757D45DAFA2246 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7FA085CAC5159822016B9DA /* AppConfig.swift in Sources */,
+				22631E5651B087DA603808AA /* ClusterListView.swift in Sources */,
+				A23E8EB74474302D629917C5 /* ClusterListViewModel.swift in Sources */,
+				CC7E1517B9FA5537AB9A0ED4 /* ClusterModels.swift in Sources */,
+				45B594A7538BBBBE6B233440 /* ClusterRowView.swift in Sources */,
+				2C6F8D23971FC4E87A8FB3AC /* ClusterState.swift in Sources */,
+				6936F9276780634E19F2CF7E /* ConfigManager.swift in Sources */,
+				E21AE54F7B59FA251E36D9E1 /* DatabricksAPIClient.swift in Sources */,
+				77190C57AAE28D95F4C89A36 /* DatabricksMenuBarApp.swift in Sources */,
+				B9612EF5C414332FFA3C36B7 /* ErrorStateView.swift in Sources */,
+				A25CD8E56760FE1BE9EB2F7E /* FooterView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		6073DF4E0B5CA70457EF6619 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		747A98420B151BD57F6EEC3B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DatabricksMenuBar/DatabricksMenuBar.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				INFOPLIST_FILE = DatabricksMenuBar/App/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.databricks-menu-bar.DatabricksMenuBar";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+		C503D543B98A0AC293199009 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		FE88B73A2DC2A78522D04FE8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DatabricksMenuBar/DatabricksMenuBar.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				INFOPLIST_FILE = DatabricksMenuBar/App/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.databricks-menu-bar.DatabricksMenuBar";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8FF4F1CEFEA1D9F967052C3E /* Build configuration list for PBXNativeTarget "DatabricksMenuBar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				747A98420B151BD57F6EEC3B /* Debug */,
+				FE88B73A2DC2A78522D04FE8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		A8536E4CB93F93BBED4F6950 /* Build configuration list for PBXProject "DatabricksMenuBar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6073DF4E0B5CA70457EF6619 /* Debug */,
+				C503D543B98A0AC293199009 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 42DE3FDEA2283DDF2D1ECAFE /* Project object */;
+}
