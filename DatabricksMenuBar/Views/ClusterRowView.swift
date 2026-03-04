@@ -50,19 +50,22 @@ struct ClusterRowView: View {
                 .frame(width: 10, height: 10)
 
             VStack(alignment: .leading, spacing: 2) {
-                HStack(spacing: 6) {
-                    Text(cluster.clusterName)
-                        .font(.system(.body, design: .default))
-                        .lineLimit(1)
+                Text(cluster.clusterName)
+                    .font(.system(.body, design: .default))
+                    .lineLimit(1)
 
-                    if !isHovered {
+                if isHovered {
+                    Text("Click to open in Databricks UI")
+                        .font(.caption)
+                        .foregroundStyle(.blue)
+                } else {
+                    HStack(spacing: 4) {
+                        Text(clusterState.displayName)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
                         detailBadges
                     }
                 }
-
-                Text(isHovered ? "Click to open in Databricks UI" : clusterState.displayName)
-                    .font(.caption)
-                    .foregroundStyle(isHovered ? .blue : .secondary)
             }
 
             Spacer()
